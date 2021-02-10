@@ -1,0 +1,7 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialogsItems {
+    border-right: 1px dashed #2C3D55;
+}

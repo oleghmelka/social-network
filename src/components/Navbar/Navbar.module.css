@@ -1,0 +1,30 @@
+.nav {
+    grid-area: n;
+    background-color: #2C3D55;
+    color: #FFFFFF;
+    padding: 5% 4% !important;
+  }
+  
+.item{
+  background-color: #3E6990;
+  cursor: pointer;
+  margin: 5%;
+  text-align: center;
+}
+
+.item:hover {
+  background-color: #427AA1;
+}
+
+.item a {
+  color:#FFFFFF;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  padding: 3%;
+}
+
+.item a.activeLink{
+  background-color: #427AA1;
+  color:gold;
+}
