@@ -1,5 +1,5 @@
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+import store from './redux/store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -8,7 +8,7 @@ import App from './App';
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
       <React.StrictMode>
-        <App state={state} addPostInState={store.addPostInState.bind(store)} addMessageInState={store.addMessageInState.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)} />
+        <App state={state} dispatch={store.dispatch.bind(store)} />
       </React.StrictMode>,
       document.getElementById('root')
     );

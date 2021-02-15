@@ -1,3 +1,7 @@
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
 let store = {
     _state: {
         profilePage: {
@@ -40,50 +44,29 @@ let store = {
         }
     
     },
-    getState() {
-        return this._state;
-    },
     _callSubscriber() {
         console.log('заглушка для вызова функции rerenderEntireTree в файле state.js');
     },
-    addPostInState() {
-    
-        let newPost = {
-            id: 8,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-    
-        this._state.profilePage.posts.push(newPost); 
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    addMessageInState() {
-   
-        let newMessage = {
-            id: 6,
-            message: this._state.dialogsPage.newMessageText
-        };
-    
-        this._state.dialogsPage.messages.push(newMessage); 
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    
-    },
-    updateNewPostText(newText) {
 
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    updateNewMessageText(newText) {
-
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         this._callSubscriber = observer;
+    },
+
+    dispatch (action) {
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
+
     }
 }
+
+
 
 
 export default store;
