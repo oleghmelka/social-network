@@ -1,8 +1,21 @@
-
 const ADD_POST_IN_STATE = 'ADD-POST-IN-STATE';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+        {id: 0, message: 'Hi, how are you?', likesCount: 12 },
+        {id: 1, message: 'I am okey, and you?', likesCount: 2 },
+        {id: 2, message: 'what?', likesCount: 4 },
+        {id: 3, message: 'nigga?', likesCount: 55 },
+        {id: 4, message: 'i kill you', likesCount: 6 },
+        {id: 5, message: 'go away', likesCount: 75 },
+        {id: 6, message: 'thanks', likesCount: 377 },
+        {id: 7, message: 'innocent agent', likesCount: 88 }
+    ],
+    newPostText: ''
+};
+
+const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
