@@ -3,9 +3,7 @@ import Friends from './Friends/Friends';
 import s from './Navbar.module.css';
 
 const Navbar = (props) => {
-
-    let state = props.store.getState();
-   
+    
     return (
         <nav className={s.nav}>
             <div className={`${s.item} ${s.active}`}>
@@ -23,7 +21,8 @@ const Navbar = (props) => {
             <div className={s.item}>
                 <NavLink to='/settings' activeClassName={s.activeLink}>Settings</NavLink>
             </div>
-            <Friends friends={state.sidebar.friends} />
+        
+            <Friends friends={props.friends} />
         </nav>
     );
   }
