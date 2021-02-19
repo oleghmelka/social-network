@@ -1,6 +1,6 @@
 
-const ADD_MESSAGE_IN_STATE = 'ADD-MESSAGE-IN-STATE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'ADD-MESSAGE-IN-STATE';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
 
@@ -13,13 +13,13 @@ let initialState = {
         {id: 5, name: 'Valera', image: 'https://st3.depositphotos.com/1007566/13024/v/950/depositphotos_130240748-stock-illustration-young-man-avatar-character.jpg' }
     ],
     messages:[
-        {id: 'first', message: 'Hi'},
-        {id: 'second', message: 'How are you, nigga?'},
-        {id: 'first', message: 'What are you saying white?'},
-        {id: 'second', message: 'It`s a joke'},
-        {id: 'first', message: 'You are died'}
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How are you, nigga?'},
+        {id: 3, message: 'What are you saying white?'},
+        {id: 4, message: 'It`s a joke'},
+        {id: 5, message: 'You are died'}
     ],
-    newMessageText: ''
+    newMessageBody: ''
 
 };
 
@@ -27,41 +27,41 @@ const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case ADD_MESSAGE_IN_STATE:
 
-            let newMessage = {
-                id: 6,
-                message: state.newMessageText
+        case UPDATE_NEW_MESSAGE_BODY: {
+            return {
+                ...state,
+                newMessageBody: action.body
             };
-        
-            state.messages.push(newMessage); 
-            state.newMessageText = '';
-            return state;
-
-        case UPDATE_NEW_MESSAGE_TEXT:
+        }
+        case SEND_MESSAGE: {
+            let body = state.newMessageBody;
             
-            state.newMessageText = action.newText;
-            return state;
-
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body} ]
+            };
+        }
         default:
             return state;
     }
 
 }
 
-
-export const sendMessageCreator = () => {
-    return {
-        type: ADD_MESSAGE_IN_STATE
+export const updateNewMessageBodyCreator = (body) => {
+    
+    return { 
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
     }
     
 }
-export const updateNewMessageBodyCreator = (body) => {
-    return { 
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newText: body
+
+export const sendMessageCreator = () => {
+    return {
+        type: SEND_MESSAGE
     }
-    
 }
 
 export default dialogsReducer;
