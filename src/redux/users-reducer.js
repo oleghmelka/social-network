@@ -8,7 +8,7 @@ let initialState = {
 };
 
 const usersReducer = (state = initialState, action) => {
-
+    debugger;
     switch (action.type) {
         case FOLLOW: 
             return {
@@ -55,8 +55,12 @@ export const unfollowAC = (userId) => {
     }
 }
 
-export const setUsersAC = (users) => ({ type: SET_USERS, users })
-
+export const setUsersAC = (users) => {
+    return { 
+        type: SET_USERS,
+        users: users
+    }
+}
 
 
 

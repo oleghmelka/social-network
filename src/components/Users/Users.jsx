@@ -1,10 +1,26 @@
+import axios from 'axios';
 import React from 'react';
 import s from './Users.module.css';
-
+import userPhoto from '../../assets/images/avatar.jpg';
 
 
 const Users = (props) => {
 
+    if (props.users.length === 0) {
+
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then (
+            response => {
+                props.setUsers(response.data.items)
+            }
+        );
+
+
+    }
+
+
+
+
+/*
     if (props.users.length === 0) {
 
         props.setUsers(
@@ -20,7 +36,9 @@ const Users = (props) => {
             ]
         );
     }
-    
+
+*/ 
+
     return(
         <div>
             <h2>Users</h2>
@@ -28,7 +46,7 @@ const Users = (props) => {
 
                 <div className={s.userLeftInfo}>
                     <div>
-                        <img className={s.userPhoto} src={u.photoUrl} alt="there are image" />
+                        <img className={s.userPhoto} src={u.photos.small !=null ? u.photos.small: userPhoto } alt="there are image" />
                     </div>
                     <div>
                         {u.followed
@@ -39,12 +57,12 @@ const Users = (props) => {
                 </div>
                 <div className={s.userRightInfo}>
                     <div className={s.infoLeft}>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </div>
                     <div className={s.infoRight}>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{"u.location.country"}</div>
+                        <div>{"u.location.city"}</div>
                     </div>
                 </div>
             </div> )}
