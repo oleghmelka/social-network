@@ -3,7 +3,6 @@
     flex-direction: row;
 }
 .userLeftInfo{
-    width: 20%;
 }
 .userPhoto{
     width: 100px;
@@ -11,15 +10,12 @@
     border-radius: 50%;
 }
 .userRightInfo{
-    width: 80%;
     display: flex;
     flex-direction: row;
 }
 .infoLeft{
-    width: 30%;
 }
 .infoRight{
-    width: 70%;
 }
 .selectedPage{
     font-weight: bold;
