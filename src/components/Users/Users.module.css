@@ -21,3 +21,10 @@
 .infoRight{
     width: 70%;
 }
+.selectedPage{
+    font-weight: bold;
+}
+.pagination span{
+    cursor: pointer;
+    padding: 5px 10px;
+}
