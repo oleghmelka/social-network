@@ -18,3 +18,12 @@
   .descriptionBlock {
     padding: 10px;
   }
+
+  .social_contacts{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social_contacts a{
+    text-decoration: none;
+  }
