@@ -10,3 +10,12 @@
   height: 70px;
   margin: 12px 20px;
 }
+.loginBlock{
+  float: right;
+  margin-right: 30px;
+  color: white;
+}
+.loginBlock a{
+  color: white;
+  text-decoration: none;
+}
