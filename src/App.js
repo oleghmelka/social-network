@@ -24,10 +24,8 @@ const App = (props) => {
           <Route exact path='/users' render={ () => <UsersContainer /> } />
           <Route exact path='/news' render={ () => <News/> } />
           <Route exact path='/music' render={ () => <Music/> } />
-
           <Route exact path='/settings' render={ () => <Settings/> } />
         </div>
-        
       </div>
     
   );

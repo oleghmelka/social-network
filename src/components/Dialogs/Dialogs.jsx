@@ -4,26 +4,15 @@ import s from './Dialogs.module.css';
 import React from 'react';
 
 
-
-
-
 const Dialogs = (props) => {
 
     let state = props.dialogsPage;
-    
     let dialogsElements = state.dialogs.map ( dia => <DialogItem name={dia.name}  id={dia.id} image={dia.image} /> );
-
     let messagesElements = state.messages.map ( mes => <Message message={mes.message} id={mes.id} /> );
-
-   // let newMessageElement = React.createRef();
-    // <textarea ref={newMessageElement} onChange={ onMessageChange } value={props.dialogsPage.newMessageText} />
-
 
     let onMessageChange = (e) => {
         let body = e.target.value;
-        
         props.updateNewMessageBody(body);
-        
     }
 
     let onSendMessageClick = () => {
