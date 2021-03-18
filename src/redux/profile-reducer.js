@@ -76,8 +76,9 @@ export const setStatus = (status) => ({ type: SET_STATUS, status })
 // ---С-А-Н-К-И--- (Thunks Creators)
 
 export const getUserProfile = (userId) => {
+    debugger;
     return (dispatch) => {
-        usersAPI.getProfile(userId).then( data => { 
+        profileAPI.getProfile(userId).then( data => { 
             dispatch(setUserProfile(data));
         } );
     } 
@@ -86,7 +87,6 @@ export const getUserProfile = (userId) => {
 export const getStatus = (userId) => {
     return (dispatch) => {
         profileAPI.getStatus(userId).then( response => { 
-            debugger;
             dispatch(setStatus(response.data));
         } );
     } 
