@@ -14,7 +14,6 @@ let initialState = {
         {id: 2, message: 'what?', likesCount: 4 },
         {id: 3, message: 'nigga?', likesCount: 55 }
     ],
-    newPostText: '',
     profile: null,
     status: ''
 };
@@ -26,19 +25,12 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 8,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
-            }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText
+                posts: [...state.posts, newPost]
             }
         }
         case SET_USER_PROFILE: {
@@ -55,18 +47,14 @@ const profileReducer = (state = initialState, action) => {
 
 // ---( Action Creators)--- 
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (formData) => {
+    
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        newPostText: formData
     }
 }
 
-export const updateNewPostTextActionCreator = (text) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
-}
 
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 
@@ -76,7 +64,7 @@ export const setStatus = (status) => ({ type: SET_STATUS, status })
 // ---С-А-Н-К-И--- (Thunks Creators)
 
 export const getUserProfile = (userId) => {
-    debugger;
+
     return (dispatch) => {
         profileAPI.getProfile(userId).then( data => { 
             dispatch(setUserProfile(data));
