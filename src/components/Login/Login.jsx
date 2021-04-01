@@ -5,7 +5,7 @@ import FormikControl from './../common/FormikComponents/FormikControl';
 import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router';
-
+import s from './../Login/Login.module.css';
 
 const Login = (props) => {
 
@@ -23,6 +23,9 @@ const Login = (props) => {
 
 
 const LoginForm = (props) => {
+   
+   
+
 
     const checkboxOptions = [
         { key: 'Remember me', value: 'Remember me' }
@@ -41,9 +44,11 @@ const LoginForm = (props) => {
     })
   
     const onSubmit = values => {
-        console.log('Form data', values);
-        console.log('Saved data', JSON.parse(JSON.stringify(values)));
+        //console.log('Form data', values);
+        //console.log('Saved data', JSON.parse(JSON.stringify(values)));
         props.login(values.login, values.password, values.rememberMe);
+
+        console.log(values);
     }
   
     return (
@@ -75,6 +80,9 @@ const LoginForm = (props) => {
                 name='checkboxOption'
                 options={checkboxOptions}
               />
+              <div className={s.formSummaryError}>
+                  ERRORS
+              </div>
               <button type='submit' disabled={!formik.isValid}>Submit</button>
             </Form>
           )
@@ -83,6 +91,8 @@ const LoginForm = (props) => {
     )
   }
   
+  //{ Object.values(props.errors).map(error => (<div>{error}</div>)) }
+
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth
