@@ -1,6 +1,22 @@
+import { createSelector } from "reselect";
+
 export const getUsers = (state) => {
     return state.usersPage.users;
 }
+
+/* "How to write the selector that was created using Reselect Library"
+
+    export const getSomethingDifficult = createSelector( getUsers, getIsFetching, 
+        (users, isFetching) => { 
+            if(isFetching){
+                return users.filter(u => true);
+            } else {
+                return 100;
+            }
+        }
+    ) 
+
+*/
 
 export const getPageSize = (state) => {
     return state.usersPage.pageSize;
@@ -21,3 +37,4 @@ export const getIsFetching = (state) => {
 export const getFollowingInProgress = (state) => {
     return state.usersPage.followingInProgress;
 }
+

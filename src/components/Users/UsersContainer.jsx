@@ -5,7 +5,7 @@ import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getFollowingInProgress, getIsFetching } from '../../redux/users-selectors';
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getFollowingInProgress, getIsFetching, getSomethingDifficult } from '../../redux/users-selectors';
 
 
 class UsersContainer extends React.Component {
@@ -41,6 +41,7 @@ class UsersContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: getUsers(state),
+        //somethingDifficult: getSomethingDifficult(state),   "How to call the selector that was created using Reselect Library"
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
