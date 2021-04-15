@@ -126,7 +126,7 @@ export const toggleFollowingProgress = (fetch, userId) => ({type: TOGGLE_IS_FOLL
 
 // ---С-А-Н-К-И--- (Thunks Creators)
 
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
             usersAPI.getUsers(currentPage, pageSize).then( data => { 
