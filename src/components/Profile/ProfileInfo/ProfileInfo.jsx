@@ -1,7 +1,8 @@
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 import userPhoto from './../../../assets/images/non_person_image.png';
-import ProfileStatus from './ProfileStatus';
+//import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     
@@ -19,7 +20,7 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.contacts.facebook ? props.profile.photos.large : userPhoto} alt="this is large avatar"/>
                 <h3>{props.profile.fullName}</h3>
                 <p>{props.profile.aboutMe}</p>
-                <h4>Я сейчас:<ProfileStatus status={props.status} updateStatus={props.updateStatus}/></h4>
+                <h4>Я сейчас:<ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/></h4>
                 <div>
                     <span>Мои контакты</span>
                     <div className={s.social_contacts}>
