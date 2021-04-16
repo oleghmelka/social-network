@@ -1,59 +1,43 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = (props) => {
+   
+    let [editMode, setEditMode] = useState(false);
+    let [status, setStatus] = useState(props.status);
+
+    useEffect( () => {
+        setStatus(props.status);
+    }, [props.status] );
+
+    const activateEditMode = () => {
+        setEditMode(true);
+    }
+
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        props.updateStatus(status);
+    }
+
+    const onStatusChange = (e) => {
+        setStatus(e.currentTarget.value);
+    }
+
+    return (
+        <div >
+            { !editMode && 
+                <div>
+                    <span onDoubleClick={activateEditMode}>{props.status || 'не ищу новую работу'}</span>
+                </div>
+            }
+            { editMode && 
+                <div>
+                    <input onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true} value={status}></input>
+                </div>
+            }
+        </div>
+    )
     
-    state = {
-        editMode: false,
-        status: this.props.status
-    }
-
-    activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-        // this.forceUpdate() Принудительно заставить Реакт перерисовать компоненту, не стоит использовать!
-    }
-
-    deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        });
-        this.props.updateStatus(this.state.status);
-    }
-
-    onStatusChange = (e) => {
-        this.setState({
-            status:e.currentTarget.value
-        });
-    }
-
-    componentDidUpdate (prevProps, prevState) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            });
-        }
-    }
-
-    render () {
-        return (
-            <div >
-                { !this.state.editMode && 
-                    <div>
-                        <span onDoubleClick = {this.activateEditMode}>{this.props.status || 'не ищу новую работу'}</span>
-                    </div>
-                }
-                { this.state.editMode && 
-                    <div>
-                        <input onChange={this.onStatusChange} onBlur={this.deactivateEditMode} autoFocus={true} value={this.state.status}></input>
-                    </div>
-                }
-            </div>
-        );
-    }
-    
-
   }
   
   

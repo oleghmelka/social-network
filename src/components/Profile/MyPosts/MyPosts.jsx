@@ -5,8 +5,8 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from './../../common/FormikComponents/FormikControl';
 
-const MyPosts = (props) => {
-    
+const MyPosts = React.memo((props) => {
+    console.log("Render YO!");
     let postsElements = props.posts.map ( element => <Post message={element.message}  likesCount={element.likesCount} />);
 
     return (
@@ -16,7 +16,7 @@ const MyPosts = (props) => {
             { postsElements }
             </div>
     )
-}
+})
 
 
 const AddNewPostForm = (props) => {
@@ -56,26 +56,6 @@ const AddNewPostForm = (props) => {
           }}
         </Formik>
       )
-
-
-
-/*
-    return  <div>
-                <Formik initialValues={initialValues} onSubmit={onAddPost} validate={validate} >
-                    {() => (
-                        <Form>
-                            <div>
-                                <Field component="textarea" name="newPostText" placeholder="write here ..." />
-                            </div>
-
-                            <div>
-                                <button type="submit">Add posts</button>
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-*/
 
 
 
