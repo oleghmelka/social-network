@@ -6,8 +6,11 @@ import * as Yup from 'yup';
 import FormikControl from './../../common/FormikComponents/FormikControl';
 
 const MyPosts = React.memo((props) => {
-    console.log("Render YO!");
-    let postsElements = props.posts.map ( element => <Post message={element.message}  likesCount={element.likesCount} />);
+    
+    let postsElements = 
+                [...props.posts]
+                .reverse()
+                .map ( element => <Post message={element.message}  likesCount={element.likesCount} />);
 
     return (
             <div className={s.postsBlock}>
