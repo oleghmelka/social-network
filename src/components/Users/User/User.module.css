@@ -1,8 +1,6 @@
-.user{
+ .user{
     display: flex;
     flex-direction: row;
-}
-.userLeftInfo{
 }
 .userPhoto{
     width: 100px;
@@ -12,8 +10,4 @@
 .userRightInfo{
     display: flex;
     flex-direction: row;
-}
-.infoLeft{
-}
-.infoRight{
 }

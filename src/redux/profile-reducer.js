@@ -69,31 +69,22 @@ export const deletePost = (postId) => ({ type: DELETE_POST, postId })
 
 // ---С-А-Н-К-И--- (Thunks Creators)
 
-export const getUserProfile = (userId) => {
+export const getUserProfile = (userId) => async (dispatch) => {
+    let response = await profileAPI.getProfile(userId);
+    dispatch(setUserProfile(response.data));
 
-    return (dispatch) => {
-        profileAPI.getProfile(userId).then( data => { 
-            dispatch(setUserProfile(data));
-        } );
-    } 
 }
 
-export const getStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then( response => { 
-            dispatch(setStatus(response.data));
-        } );
-    } 
+export const getStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data));
 }
 
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then( response => { 
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status));
-            }
-        } );
-    } 
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+    }
 }
 
 

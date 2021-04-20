@@ -7,22 +7,22 @@ import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router';
 import s from './../Login/Login.module.css';
 
-const Login = (props) => {
+const Login = ({isAuth, login}) => {
 
-  if(props.isAuth) {
+  if(isAuth) {
     return <Redirect to={"/profile"} />
   }
 
   return (
         <div>
             <h2>_L-O-G-I-N_</h2>
-            <LoginForm login={props.login} />
+            <LoginForm login={login} />
         </div>
   )
 }
 
 
-const LoginForm = (props) => {
+const LoginForm = ({login}) => {
    
    
 
@@ -46,7 +46,7 @@ const LoginForm = (props) => {
     const onSubmit = values => {
         //console.log('Form data', values);
         //console.log('Saved data', JSON.parse(JSON.stringify(values)));
-        props.login(values.login, values.password, values.rememberMe);
+        login(values.login, values.password, values.rememberMe);
 
         console.log(values);
     }
