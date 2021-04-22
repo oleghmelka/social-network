@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+//import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SocialNetworkApp from './App';
 
 /* test('renders learn react link', () => {
     render(<App />);
@@ -12,6 +12,6 @@ import ReactDOM from 'react-dom';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<SocialNetworkApp />, div);
     ReactDOM.unmountComponentAtNode(div);
 });
