@@ -13,7 +13,8 @@ import { connect } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+//import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 import { withSuspense } from './hoc/withSuspense';
 
@@ -65,12 +66,20 @@ const AppContainer = compose (
     connect (mapStateToProps, { initializeApp })
 ) (App);
 
-const SocialNetworkApp = (props) => {
-  return   <BrowserRouter>
+const SocialNetworkApp = () => {
+
+/*    <BrowserRouter basename={process.env.PUBLIC_URL}> In a real hosting we use BrowserRouter with basename
+            <Provider store={store}>
+                <AppContainer />
+            </Provider>
+        </BrowserRouter> */
+  
+// in github pages we use HashRouter
+  return   <HashRouter>    
                 <Provider store={store}>
                     <AppContainer />
                 </Provider>
-            </BrowserRouter>
+            </HashRouter>
 }
 
 export default SocialNetworkApp;
