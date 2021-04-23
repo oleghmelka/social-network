@@ -8,7 +8,7 @@ let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, foll
 
         return <div>
                     <h2>Users</h2>
-                    <Paginator currentPage={currentPage} onPageChanged={onPageChanged} totalUsersCount={totalUsersCount} pageSize={pageSize} />
+                    <Paginator currentPage={currentPage} onPageChanged={onPageChanged} totalItemsCount={totalUsersCount} pageSize={pageSize} />
                     <div>
                         {
                             users.map( u => <User   user={u}
