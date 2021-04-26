@@ -39,7 +39,6 @@ const LoginForm = ({login, autentificationError}) => {
   
     const onSubmit = (values) => {
         login(values.login, values.password, values.rememberMe);
-        console.log(values);
     }
   
     return (
@@ -81,7 +80,7 @@ const LoginForm = ({login, autentificationError}) => {
     )
   }
   
-  //{ Object.values(props.errors).map(error => (<div>{error}</div>)) }
+
 
 
 const mapStateToProps = (state) => ({

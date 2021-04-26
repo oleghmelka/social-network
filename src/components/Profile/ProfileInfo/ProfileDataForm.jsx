@@ -11,7 +11,8 @@ const ProfileDataForm = ({profile, saveProfile, setEditMode, someError}) => {
         fullName: profile.fullName,
         lookingForAJobDescription: profile.lookingForAJobDescription,
         aboutMe: profile.aboutMe,
-        lookingForAJob: profile.lookingForAJob
+        lookingForAJob: profile.lookingForAJob,
+        contacts: profile.contacts
     }
   
     const validationSchema = Yup.object({
@@ -27,6 +28,7 @@ const ProfileDataForm = ({profile, saveProfile, setEditMode, someError}) => {
             setEditMode(false);
           }
         );
+        console.log(formData);
     }
     
     return (
