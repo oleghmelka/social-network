@@ -5,9 +5,10 @@ import FormikControl from './../common/FormikComponents/FormikControl';
 import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router';
-import s from './../Login/Login.module.css';
+//import s from './../Login/Login.module.css';
+import style from './../common/FormikComponents/FormikComponents.module.css';
 
-const Login = ({isAuth, login}) => {
+const Login = ({isAuth, login, autentificationError}) => {
 
   if(isAuth) {
     return <Redirect to={"/profile"} />
@@ -16,38 +17,28 @@ const Login = ({isAuth, login}) => {
   return (
         <div>
             <h2>_L-O-G-I-N_</h2>
-            <LoginForm login={login} />
+            <LoginForm login={login} autentificationError={autentificationError} />
         </div>
   )
 }
 
 
-const LoginForm = ({login}) => {
+const LoginForm = ({login, autentificationError}) => {
    
-   
-
-
-    const checkboxOptions = [
-        { key: 'Remember me', value: 'Remember me' }
-      ]
-    
     const initialValues = {
         login: '',
         password: '',
-        checkboxOption: []
+        rememberMe: false
     }
   
     const validationSchema = Yup.object({
         login: Yup.string().required('Required'),
         password: Yup.string().required('Required'),
-        checkboxOption: Yup.array().required('Required')
+        rememberMe: Yup.bool()
     })
   
-    const onSubmit = values => {
-        //console.log('Form data', values);
-        //console.log('Saved data', JSON.parse(JSON.stringify(values)));
+    const onSubmit = (values) => {
         login(values.login, values.password, values.rememberMe);
-
         console.log(values);
     }
   
@@ -74,15 +65,14 @@ const LoginForm = ({login}) => {
                 name='password'
                 placeholder='your email'
               />
-            <FormikControl
-                control='checkbox'
-                label=''
-                name='checkboxOption'
-                options={checkboxOptions}
+              <FormikControl 
+                control='checkbox_boolean' 
+                label='Remember me' 
+                name='rememberMe' 
               />
-              <div className={s.formSummaryError}>
-                  ERRORS
-              </div>
+
+              {autentificationError && <div className={style.formSummaryError}>{autentificationError}</div>}
+
               <button type='submit' disabled={!formik.isValid}>Submit</button>
             </Form>
           )
@@ -95,7 +85,8 @@ const LoginForm = ({login}) => {
 
 
 const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  autentificationError: state.auth.autentificationError
 })
  
 export default connect (mapStateToProps, {login}) (Login);

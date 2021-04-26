@@ -1,13 +1,15 @@
 import { authAPI } from "../api/api";
 
 const SET_USER_DATA = 'socialNetwork/auth/SET_USER_DATA';
+const AUTENTIFICATION_ERROR = 'AUTENTIFICATION_ERROR';
 
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    autentificationError: ''
 };
 
 const authReducer = (state = initialState, action) => {
@@ -17,8 +19,12 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA: {
             return {
                 ...state,
-                ...action.payload
+                ...action.payload,
+                autentificationError: ''
             }
+        }
+        case AUTENTIFICATION_ERROR: {
+            return {...state, autentificationError: action.autentificationError}
         }
         
         default:
@@ -30,6 +36,8 @@ const authReducer = (state = initialState, action) => {
 // ---( Action Creators)--- 
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: {userId, email, login, isAuth} })
+
+export const addAutentificationError = (autentificationError) => ({ type: AUTENTIFICATION_ERROR, autentificationError })
 
 
 // ---С-А-Н-К-И--- (Thunks Creators)
@@ -47,9 +55,8 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData());
     } else {
-        console.log("ошибочка вышла");
-        //let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
-        //dispatch(stopSubmit("login", {_error: message}));
+        dispatch(addAutentificationError(response.data.messages[0]));
+        //return Promise.reject(response.data.messages[0]);
     }
 }
 

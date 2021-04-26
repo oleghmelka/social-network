@@ -6,7 +6,7 @@ import s from './../../common/FormikComponents/FormikComponents.module.css';
 import style from './ProfileInfo.module.css';
 
 const ProfileDataForm = ({profile, saveProfile, setEditMode, someError}) => {
-    debugger;
+    
     const initialValues = {
         fullName: profile.fullName,
         lookingForAJobDescription: profile.lookingForAJobDescription,

@@ -19,7 +19,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
             savePhoto(e.target.files[0]);
         }
     }
-    debugger;
+    
     return (
         <div className={s.content}>
             <div className={s.wallpaper}>
