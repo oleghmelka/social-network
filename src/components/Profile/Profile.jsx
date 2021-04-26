@@ -5,7 +5,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 
 const Profile = (props) => {
-
+    debugger;
     return (
         <div className={s.content}>
             <ProfileInfo    profile={props.profile} 
@@ -14,6 +14,7 @@ const Profile = (props) => {
                             updateStatus={props.updateStatus}
                             savePhoto={props.savePhoto}
                             saveProfile={props.saveProfile}
+                            someError={props.someError}
             />
             <MyPostsContainer />            
         </div>

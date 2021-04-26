@@ -5,7 +5,7 @@ import ProfileStatus from './ProfileStatus';
 import React, { useState } from 'react';
 import ProfileDataForm from './ProfileDataForm';
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, someError}) => {
     
     let [editMode, setEditMode] = useState(false);
 
@@ -19,7 +19,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
             savePhoto(e.target.files[0]);
         }
     }
-
+    debugger;
     return (
         <div className={s.content}>
             <div className={s.wallpaper}>
@@ -40,6 +40,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
                     ? <ProfileDataForm  profile={profile}
                                         saveProfile={saveProfile}
                                         setEditMode={setEditMode}
+                                        someError={someError}
                        /> 
                     : <ProfileData  profile={profile} 
                                     isOwner={isOwner}

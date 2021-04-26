@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 import { Form, Formik } from 'formik';
 import FormikControl from '../../common/FormikComponents/FormikControl';
 import * as Yup from 'yup';
+import s from './../../common/FormikComponents/FormikComponents.module.css';
+import style from './ProfileInfo.module.css';
 
-const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
-    
+const ProfileDataForm = ({profile, saveProfile, setEditMode, someError}) => {
+    debugger;
     const initialValues = {
         fullName: profile.fullName,
         lookingForAJobDescription: profile.lookingForAJobDescription,
@@ -21,8 +22,11 @@ const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
     })
   
     const onSubmit = (formData) => {
-        saveProfile(formData);
-        setEditMode(false);
+        saveProfile(formData).then(
+          () => {
+            setEditMode(false);
+          }
+        );
     }
     
     return (
@@ -47,11 +51,16 @@ const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
                       <FormikControl control='textarea' type='text' label='About me:' name='aboutMe' placeholder='About me' />
                   </div>
 
-                  <div>
-                      <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
-                          return <FormikControl key={key} control='input' type='text' label={key} name={'contacts.'+ key} placeholder={key} />
-                      })}
+                  <div >
+                      <b>Contacts:</b> 
+                            <div className={style.social_contacts_form}>
+                                  {Object.keys(profile.contacts).map(key => {
+                                      return <FormikControl key={key} control='input' type='text' label={key} name={'contacts.'+ key} placeholder={profile.contacts[key]} />
+                                  })}
+                            </div>
                   </div>
+
+                  {someError && <div className={s.formSummaryError}>{someError}</div>}
 
                   <div>
                     <button type='submit' disabled={!formik.isValid}>Save</button>

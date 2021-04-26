@@ -27,7 +27,7 @@ class ProfileContainer extends React.Component {
     componentDidMount () {
         this.refreshProfile ();
     }
-
+    
     componentDidUpdate (prevProps, prevState, snapshot) {
         if (this.props.match.params.userId != prevProps.match.params.userId) {
             this.refreshProfile ();
@@ -35,7 +35,7 @@ class ProfileContainer extends React.Component {
     }
 
     render () {
-
+        debugger;
         return (
             <Profile    {...this.props} 
                         isOwner={!this.props.match.params.userId}
@@ -44,6 +44,7 @@ class ProfileContainer extends React.Component {
                         updateStatus={this.props.updateStatus}
                         savePhoto={this.props.savePhoto}
                         saveProfile={this.props.saveProfile}
+                        someError={this.props.someError}
             />           
          );
     }
@@ -54,7 +55,8 @@ class ProfileContainer extends React.Component {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         autorizedUserId: state.auth.userId,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        someError: state.profilePage.someError
   }); 
   
 
