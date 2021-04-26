@@ -13,8 +13,8 @@ import { connect } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { Provider } from 'react-redux';
-//import { BrowserRouter } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+//import { HashRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 import { withSuspense } from './hoc/withSuspense';
 
@@ -75,11 +75,21 @@ const SocialNetworkApp = () => {
         </BrowserRouter> */
   
 // in github pages we use HashRouter
-  return   <HashRouter>    
+/* 
+            <HashRouter>    
                 <Provider store={store}>
                     <AppContainer />
                 </Provider>
-            </HashRouter>
+            </HashRouter> */
+
+
+
+
+  return   <BrowserRouter basename={process.env.PUBLIC_URL}>    
+                <Provider store={store}>
+                    <AppContainer />
+                </Provider>
+            </BrowserRouter>
 }
 
 export default SocialNetworkApp;

@@ -4,7 +4,6 @@
     width:100%;
     height:300px;
 }
-
 .wallpaper img {
     position: absolute;
     top:50%;
@@ -15,15 +14,20 @@
     object-fit:cover;
   }
   
+
+  .mainPhoto {
+    max-width: 200px;
+    padding: 10px;
+  }
+  .buttonChangePhoto{
+    padding-left: 10px;
+  }
+
+
   .descriptionBlock {
     padding: 10px;
   }
-
   .social_contacts{
-    display: flex;
-    flex-direction: column;
+    padding-left: 10px;
   }
 
-  .social_contacts a{
-    text-decoration: none;
-  }

@@ -2,42 +2,100 @@ import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 import userPhoto from './../../../assets/images/non_person_image.png';
 import ProfileStatus from './ProfileStatus';
+import React, { useState } from 'react';
+import ProfileDataForm from './ProfileDataForm';
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     
-    
+    let [editMode, setEditMode] = useState(false);
+
+
     if (!profile) {
         return ( <Preloader />);
     }
-    
+
+    const onMainPhotoSelected = (e) => {
+        if(e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    }
+
     return (
         <div className={s.content}>
             <div className={s.wallpaper}>
                 <img src='https://media.gettyimages.com/photos/kingfisher-picture-id696916250?s=2048x2048' />
             </div>
-            <div className={s.descriptionBlock}>
-                <img src={profile.contacts.facebook ? profile.photos.large : userPhoto} alt="this is large avatar"/>
-                <h3>{profile.fullName}</h3>
-                <p>{profile.aboutMe}</p>
-                <h4>Я сейчас:<ProfileStatus status={status} updateStatus={updateStatus}/></h4>
-                <div>
-                    <span>Мои контакты</span>
-                    <div className={s.social_contacts}>
-                        {<span>Facebook: <a href="">{ profile.contacts.facebook ? profile.contacts.facebook : '-'}</a></span>}
-                        <span>My Website: <a href="">{profile.contacts.website ? profile.contacts.website : '-'}</a></span>
-                        <span>Vkontakte: <a href="">{profile.contacts.vkontakte ? profile.contacts.vkontakte : '-'}</a></span>
-                        <span>Twitter: <a href="">{profile.contacts.twitter ? profile.contacts.twitter : '-'}</a></span>
-                        <span>Instagram: <a href="">{profile.contacts.instagram ? profile.contacts.instagram : '-'}</a></span>
-                        <span>Youtube: <a href="">{profile.contacts.youtube ? profile.contacts.youtube : '-'}</a></span>
-                        <span>Github: <a href="">{profile.contacts.gthub ? profile.contacts.gthub : '-'}</a></span>
-                        <span>MainLink: <a href="">{profile.contacts.mainLink ? profile.contacts.mainLink : '-'}</a></span>
-                    </div>
+
+            <img src={profile.photos.large || userPhoto} className={s.mainPhoto} alt="this is large avatar"/>
+            
+            { isOwner &&
+                <div className={s.buttonChangePhoto} >
+                    <b>Change photo: </b> <input type={"file"} onChange={onMainPhotoSelected} /> 
                 </div>
-                
-            </div>
+            }
+            
+            <ProfileStatus status={status} updateStatus={updateStatus}/>
+            
+            { editMode 
+                    ? <ProfileDataForm  profile={profile}
+                                        saveProfile={saveProfile}
+                                        setEditMode={setEditMode}
+                       /> 
+                    : <ProfileData  profile={profile} 
+                                    isOwner={isOwner}
+                                    goToEditMode={ () => {setEditMode(true)} } 
+                       /> 
+            }
+            
+            
         </div>
     );
   }
+
+const Contact = ({contactTitle, contactValue}) => {
+    return <div className={s.social_contacts}><b>{contactTitle}: </b>{contactValue}</div>
+}
+
+const ProfileData = ({profile, isOwner, goToEditMode}) => {
+      return   (          
+                    <div className={s.descriptionBlock}> 
+
+                        <div>
+                            <b>Full name:</b> {profile.fullName}
+                        </div>
+                    
+                        <div>
+                            <b>Looking for a job:</b> {profile.lookingForAJob ? "yes" : "no"}
+                        </div>
+
+                        { profile.lookingForAJob && <div>
+                                                        <b>My professional skills:</b> {profile.lookingForAJobDescription}
+                                                    </div>
+                        }
+
+                        <div>
+                            <b>About me:</b> {profile.aboutMe}
+                        </div>
+
+                        <div>
+                            <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
+                                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+                            })}
+                        </div>
+
+                        { isOwner &&
+                            <div>
+                                <button onClick={goToEditMode}>Edit</button>
+                            </div>
+                        }
+                    
+                </div>
+            )
+}
+
+
+
+
   
   
   export default ProfileInfo;
