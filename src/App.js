@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom';
+//import { HashRouter } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -9,12 +10,9 @@ import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-//import { HashRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 import { withSuspense } from './hoc/withSuspense';
 
@@ -27,33 +25,46 @@ const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileC
 
 class App extends React.Component {
 
-  componentDidMount(){
-    this.props.initializeApp();
-  }
+    catchAllUnhandledErrors = (reason, promise) => {
+        alert("Some error occured");
+    }
 
-  render () {
+    componentDidMount () {
+        this.props.initializeApp();
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
 
-      if (!this.props.initialized) {
-          return <Preloader />
-      }
-      
+    componentWillUnmount () {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
 
-      return (
-          <div className='app-wrapper'>
-            <HeaderContainer />
-            <NavbarContainer />
-            <div className='app-wrapper-content'>
-              <Route path='/profile/:userId?' render={ withSuspense(ProfileContainer) } />
-              <Route exact path='/dialogs' render={ withSuspense(DialogsContainer) } />
-              <Route exact path='/users' render={ () => <UsersContainer /> } />
-              <Route exact path='/news' render={ () => <News/> } />
-              <Route exact path='/music' render={ () => <Music/> } />
-              <Route exact path='/settings' render={ () => <Settings/> } />
-              <Route exact path='/login' render={ () => <LoginPage/> } />
+    render () {
+
+        if (!this.props.initialized) {
+            return <Preloader />
+        }
+        
+
+        return (
+            <div className='app-wrapper'>
+                <HeaderContainer />
+                <NavbarContainer />
+                <div className='app-wrapper-content'>
+                    <Switch>
+                        <Route exact path='/' render={ () => <Redirect to={'/profile'} /> } />   
+                        <Route path='/profile/:userId?' render={ withSuspense(ProfileContainer) } />
+                        <Route path='/dialogs' render={ withSuspense(DialogsContainer) } />
+                        <Route path='/users' render={ () => <UsersContainer /> } />
+                        <Route path='/news' render={ () => <News/> } />
+                        <Route path='/music' render={ () => <Music/> } />
+                        <Route path='/settings' render={ () => <Settings/> } />
+                        <Route path='/login' render={ () => <LoginPage/> } />
+                        <Route path='*' render={ () => <div>404 Page Not Found</div> } />
+                    </Switch>
+                </div>
             </div>
-          </div>
-      );
-  }
+        );
+    }
 
 }
 
@@ -68,23 +79,15 @@ const AppContainer = compose (
 
 const SocialNetworkApp = () => {
 
-/*    <BrowserRouter basename={process.env.PUBLIC_URL}> In a real hosting we use BrowserRouter with basename
-            <Provider store={store}>
-                <AppContainer />
-            </Provider>
-        </BrowserRouter> */
-  
-// in github pages we use HashRouter
-/* 
+/* in github pages we use HashRouter
+ 
             <HashRouter>    
                 <Provider store={store}>
                     <AppContainer />
                 </Provider>
             </HashRouter> */
 
-
-
-
+// In real hosting we use BrowserRouter with basename
   return   <BrowserRouter basename={process.env.PUBLIC_URL}>    
                 <Provider store={store}>
                     <AppContainer />
