@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom';
-//import { HashRouter } from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+//import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -79,20 +80,27 @@ const AppContainer = compose (
 
 const SocialNetworkApp = () => {
 
-/* in github pages we use HashRouter
+/* In github pages we use HashRouter
  
             <HashRouter>    
                 <Provider store={store}>
                     <AppContainer />
                 </Provider>
-            </HashRouter> */
-
-// In real hosting we use BrowserRouter with basename
-  return   <BrowserRouter basename={process.env.PUBLIC_URL}>    
+            </HashRouter> 
+            
+    In real hosting we use BrowserRouter with basename
+           <BrowserRouter basename={process.env.PUBLIC_URL}>    
                 <Provider store={store}>
                     <AppContainer />
                 </Provider>
-            </BrowserRouter>
+            </BrowserRouter>  */
+
+
+  return   <HashRouter>    
+                <Provider store={store}>
+                    <AppContainer />
+                </Provider>
+            </HashRouter>
 }
 
 export default SocialNetworkApp;

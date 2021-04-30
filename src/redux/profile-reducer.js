@@ -12,10 +12,10 @@ const ADD_SOME_ERROR = 'ADD_SOME_ERROR';
 
 let initialState = {
     posts: [
-        {id: 0, message: 'Hi, how are you?', likesCount: 12 },
-        {id: 1, message: 'I am okey, and you?', likesCount: 2 },
-        {id: 2, message: 'what?', likesCount: 4 },
-        {id: 3, message: 'nigga?', likesCount: 55 }
+        {id: 0, message: 'I am trying to study React', likesCount: 12 },
+        {id: 1, message: 'And how? It turns out?', likesCount: 2 },
+        {id: 2, message: 'Yes, but ...?', likesCount: 4 },
+        {id: 3, message: 'But, what?', likesCount: 55 }
     ],
     profile: null,
     status: '',

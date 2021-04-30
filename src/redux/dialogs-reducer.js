@@ -14,10 +14,10 @@ let initialState = {
     ],
     messages:[
         {id: 1, message: 'Hi'},
-        {id: 2, message: 'How are you, nigga?'},
-        {id: 3, message: 'What are you saying white?'},
-        {id: 4, message: 'It`s a joke'},
-        {id: 5, message: 'You are died'}
+        {id: 2, message: 'Hello! How are you?'},
+        {id: 3, message: 'I am fine and you?'},
+        {id: 4, message: 'I am tired very much'},
+        {id: 5, message: 'Why?'}
     ]
 
 };
