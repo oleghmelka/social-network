@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
-//import { BrowserRouter } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+//import { HashRouter } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -16,6 +16,7 @@ import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import store from './redux/redux-store';
 import { withSuspense } from './hoc/withSuspense';
+import { MuiThemeProvider } from '@material-ui/core';
 
 //import DialogsContainer from './components/Dialogs/DialogsContainer';
 //import ProfileContainer from './components/Profile/ProfileContainer';
@@ -96,11 +97,13 @@ const SocialNetworkApp = () => {
             </BrowserRouter>  */
 
 
-  return   <HashRouter>    
+  return   <BrowserRouter basename={process.env.PUBLIC_URL}>   
                 <Provider store={store}>
-                    <AppContainer />
+                    <MuiThemeProvider>
+                        <AppContainer />
+                    </MuiThemeProvider>
                 </Provider>
-            </HashRouter>
+            </BrowserRouter>
 }
 
 export default SocialNetworkApp;

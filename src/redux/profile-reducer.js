@@ -1,13 +1,13 @@
 import { profileAPI, usersAPI } from "../api/api";
 
-const ADD_POST = 'ADD-POST-IN-STATE';
+const ADD_POST = 'socialNetwork/profile/ADD-POST-IN-STATE';
 //const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
+const SET_USER_PROFILE = 'socialNetwork/profile/SET_USER_PROFILE';
+const SET_STATUS = 'socialNetwork/profile/SET_STATUS';
 //const UPDATE_STATUS = 'UPDATE_STATUS';
-const DELETE_POST = 'DELETE_POST';
-const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
-const ADD_SOME_ERROR = 'ADD_SOME_ERROR';
+const DELETE_POST = 'socialNetwork/profile/DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'socialNetwork/profile/SAVE_PHOTO_SUCCESS';
+const ADD_SOME_ERROR = 'socialNetwork/profile/ADD_SOME_ERROR';
 
 
 let initialState = {

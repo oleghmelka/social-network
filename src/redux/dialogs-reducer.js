@@ -1,6 +1,6 @@
 
-const SEND_MESSAGE = 'ADD-MESSAGE-IN-STATE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'socialNetwork/dialogs/ADD-MESSAGE-IN-STATE';
+const UPDATE_NEW_MESSAGE_BODY = 'socialNetwork/dialogs/UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
 

@@ -65,7 +65,7 @@ const LoginForm = ({login, autentificationError, captchaUrl}) => {
                 type='password'
                 label=''
                 name='password'
-                placeholder='your email'
+                placeholder='your password'
               />
               <FormikControl 
                 control='checkbox_boolean' 

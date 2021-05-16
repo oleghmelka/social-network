@@ -1,8 +1,8 @@
 import { authAPI, securityAPI } from "../api/api";
 
 const SET_USER_DATA = 'socialNetwork/auth/SET_USER_DATA';
-const AUTENTIFICATION_ERROR = 'AUTENTIFICATION_ERROR';
-const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS';
+const AUTENTIFICATION_ERROR = 'socialNetwork/auth/AUTENTIFICATION_ERROR';
+const GET_CAPTCHA_URL_SUCCESS = 'socialNetwork/auth/GET_CAPTCHA_URL_SUCCESS';
 
 
 let initialState = {
