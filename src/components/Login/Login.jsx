@@ -9,6 +9,10 @@ import { Redirect } from 'react-router';
 import style from './../common/FormikComponents/FormikComponents.module.css';
 import { propNames } from '@chakra-ui/styled-system';
 
+import Button from '@material-ui/core/Button';
+//import Input from '@material-ui/core/Input';
+//import Checkbox from '@material-ui/core/Checkbox';
+
 const Login = ({isAuth, login, autentificationError, captchaUrl}) => {
 
   if(isAuth) {
@@ -41,6 +45,7 @@ const LoginForm = ({login, autentificationError, captchaUrl}) => {
     })
   
     const onSubmit = (values) => {
+        //console.log(values);
         login(values.login, values.password, values.rememberMe, values.captcha);
     }
   
@@ -58,20 +63,24 @@ const LoginForm = ({login, autentificationError, captchaUrl}) => {
                 type='text'
                 label=''
                 name='login'
-                placeholder='your login'
+                placeholder='Your login'
               />
               <FormikControl
                 control='input'
                 type='password'
                 label=''
                 name='password'
-                placeholder='your password'
-              />
-              <FormikControl 
+                placeholder='Your password'
+              /> 
+               <FormikControl 
                 control='checkbox_boolean' 
                 label='Remember me' 
                 name='rememberMe' 
-              />
+              />  
+
+           {/*     <Input type="text" placeholder="Your login" color="secondary" name="login" required={true}></Input>
+              <Input type="password" placeholder="Your password" color="secondary" name="password" required={true}></Input>
+              <Checkbox color="primary" value="Remember me" />  */}
 
               { captchaUrl && <img src={captchaUrl} />}
               
@@ -79,11 +88,13 @@ const LoginForm = ({login, autentificationError, captchaUrl}) => {
 
               {autentificationError && <div className={style.formSummaryError}>{autentificationError}</div>}
 
-              <button type='submit' disabled={!formik.isValid}>Submit</button>
+              {/*<button type='submit' disabled={!formik.isValid}>Submit</button>*/}
+              <Button variant="contained" color="primary" disabled={!formik.isValid} type='submit' >Log In</Button>
             </Form>
           )
         }}
       </Formik>
+      
     )
   }
   
